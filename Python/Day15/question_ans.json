@@ -1,0 +1,7 @@
+[{"question" : "Who won T20 world cup 2024 ?",
+  "option": ["Australia", "England", "Pakistan", "India"],
+  "correct_answer" : 4},
+ {"question" : "Who won the man of the Series 2024 ?",
+   "option": ["Virat Kholi", "Bumrah", "Jadega", "Rohit"],
+   "correct_answer": 2
+ }]
