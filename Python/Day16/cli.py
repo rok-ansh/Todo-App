@@ -23,20 +23,30 @@ while True:
             print(row)
 
     elif user_action.startswith("edit"):
-        user_number = int(user_action[5:])
-        number = user_number - 1
-        todos = functions.get_todos()
-        edit_item = input("Enter the value to edit : ")
-        todos[number] = edit_item + '\n'
-        functions.write_todos(todos)
+        try:
+            user_number = int(user_action[5:])
+            number = user_number - 1
+            todos = functions.get_todos()
+            edit_item = input("Enter the value to edit : ")
+            todos[number] = edit_item + '\n'
+            functions.write_todos(todos)
+        except ValueError:
+            print("your command is not valid")
+            continue
 
     elif user_action.startswith("complete"):
-        user_num = int(user_action[9:])
-        number = user_num -1
-        todos = functions.get_todos()
-        item_completed = todos[number]
-        todos.remove(item_completed)
-        functions.write_todos(todos)
+        try:
+            user_num = int(user_action[9:])
+            todos = functions.get_todos()
+            number = user_num - 1
+            item_completed = todos[number].strip('\n')
+            todos.pop(number)
+            functions.write_todos(todos)
+            message = f"Todo {item_completed} was removed from the list"
+            print(message)
+        except IndexError:
+            print("There is no item with that number")
+            continue
 
     elif user_action.startswith("exit"):
         break
