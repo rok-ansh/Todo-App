@@ -9,9 +9,11 @@ exit_button = sg.Button("Exit")
 list_box = sg.Listbox(functions.get_todos(), key='my_todos_list',
                       enable_events=True, size=(45,10))
 edit_button = sg.Button("Edit")
+complete_button =sg.Button("Complete")
 window = sg.Window("My To-do List",
                    layout=[[label], [input_box, add_button],
-                           [list_box, edit_button],[exit_button]],
+                           [list_box, edit_button, complete_button],
+                           [exit_button]],
                    font=('Helvetica', 15))
 
 while True:
@@ -39,6 +41,17 @@ while True:
 
             # Inorder to update listbox live
             window['my_todos_list'].update(values=todos)
+
+        case "Complete":
+            todos_complete = values['my_todos_list'][0]
+            todos = functions.get_todos()
+
+            todos.remove(todos_complete)
+            functions.write_todos(todos)
+
+            window['my_todos_list'].update(values=todos)
+            # After completing the task we want to make the input box as empty
+            window['todo'].update(value="")
 
         case "my_todos_list":
             window['todo'].update(value=values['my_todos_list'][0])
